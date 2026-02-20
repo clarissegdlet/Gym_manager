@@ -1,0 +1,10 @@
+{
+  "smartGymManagerApp": {
+    "MembershipStatus": {
+      "null": "",
+      "ACTIVE": "ACTIVE",
+      "SUSPENDED": "SUSPENDED",
+      "EXPIRED": "EXPIRED"
+    }
+  }
+}

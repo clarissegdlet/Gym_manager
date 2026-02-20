@@ -1,0 +1,21 @@
+{
+  "generator-jhipster": {
+    "applicationType": "monolith",
+    "authenticationType": "jwt",
+    "baseName": "smartGymManager",
+    "buildTool": "maven",
+    "clientFramework": "angular",
+    "devDatabaseType": "h2Disk",
+    "enableSwaggerCodegen": true,
+    "entities": ["Member", "Membership", "Payment", "ClassSession", "Booking", "CheckIn"],
+    "jhipsterVersion": "8.11.0",
+    "jwtSecretKey": "ZTc1NDE5ZGQwNzRmNTA3Nzc5YWU1OWFkMjU4YmI1NjExYjc4NDM3MDcxNTU0MzNlY2MxYzNiYWJkYjNlMjNlNTdiZTQ1MWM3NjcwMWQxZGJhNDQ3MGFkMDlhOGQ1MjU2MDhkZDNmNjQ3MGExYWVjMjJmYTUyNmI2ZmFhNTVkNDQ=",
+    "languages": ["en"],
+    "lastLiquibaseTimestamp": 1771583686000,
+    "monorepository": true,
+    "nativeLanguage": "en",
+    "packageName": "com.smartgym.manager",
+    "prodDatabaseType": "postgresql",
+    "skipCommitHook": true
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "annotations": {
+    "changelogDate": "20260220103346"
+  },
+  "applications": ["smartGymManager"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "bookingStatus",
+      "fieldType": "BookingStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "CONFIRMED,CANCELLED"
+    },
+    {
+      "fieldName": "bookingTime",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Booking",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "member",
+      "otherEntityRelationshipName": "bookings",
+      "relationshipName": "member",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "classSession",
+      "otherEntityRelationshipName": "bookings",
+      "relationshipName": "classSession",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

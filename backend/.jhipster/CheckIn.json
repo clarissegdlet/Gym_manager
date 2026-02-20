@@ -1,0 +1,28 @@
+{
+  "annotations": {
+    "changelogDate": "20260220103446"
+  },
+  "applications": ["smartGymManager"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "checkInTime",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "CheckIn",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "member",
+      "otherEntityRelationshipName": "checkIns",
+      "relationshipName": "member",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

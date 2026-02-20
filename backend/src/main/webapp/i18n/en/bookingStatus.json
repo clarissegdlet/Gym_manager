@@ -1,0 +1,9 @@
+{
+  "smartGymManagerApp": {
+    "BookingStatus": {
+      "null": "",
+      "CONFIRMED": "CONFIRMED",
+      "CANCELLED": "CANCELLED"
+    }
+  }
+}

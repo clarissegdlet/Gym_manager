@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (booking(); as bookingRef) {
+      <div>
+        <h2 data-cy="bookingDetailsHeading"><span jhiTranslate="smartGymManagerApp.booking.detail.title">Booking</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ bookingRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="smartGymManagerApp.booking.bookingStatus">Booking Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'smartGymManagerApp.BookingStatus.' + (bookingRef.bookingStatus ?? 'null')">{{
+              { null: '', CONFIRMED: 'CONFIRMED', CANCELLED: 'CANCELLED' }[bookingRef.bookingStatus ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="smartGymManagerApp.booking.bookingTime">Booking Time</span></dt>
+          <dd>
+            <span>{{ bookingRef.bookingTime | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="smartGymManagerApp.booking.member">Member</span></dt>
+          <dd>
+            @if (booking()!.member) {
+              <div>
+                <a [routerLink]="['/member', booking()!.member?.id, 'view']">{{ bookingRef.member?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="smartGymManagerApp.booking.classSession">Class Session</span></dt>
+          <dd>
+            @if (booking()!.classSession) {
+              <div>
+                <a [routerLink]="['/class-session', booking()!.classSession?.id, 'view']">{{ bookingRef.classSession?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/booking', bookingRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

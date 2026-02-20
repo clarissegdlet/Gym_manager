@@ -1,0 +1,10 @@
+{
+  "smartGymManagerApp": {
+    "ClassStatus": {
+      "null": "",
+      "PLANNED": "PLANNED",
+      "COMPLETED": "COMPLETED",
+      "CANCELLED": "CANCELLED"
+    }
+  }
+}

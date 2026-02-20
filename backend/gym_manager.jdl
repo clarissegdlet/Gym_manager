@@ -1,0 +1,79 @@
+application {
+  config {
+    baseName smartGymManager
+    applicationType monolith
+    packageName com.smartgym.manager
+    authenticationType jwt
+    prodDatabaseType postgresql
+    devDatabaseType h2Disk
+    buildTool maven
+    clientFramework angular
+    enableSwaggerCodegen true
+  }
+  entities Member, Membership, Payment, ClassSession, Booking, CheckIn
+}
+
+entity Member {
+  name String required
+  email String required unique
+  phone String
+  active Boolean required
+}
+
+entity Membership {
+  type String required
+  startDate Instant required
+  endDate Instant required
+  status MembershipStatus required
+}
+
+entity Payment {
+  amount Double required
+  paymentDate Instant required
+  method String
+}
+
+entity ClassSession {
+  title String required
+  dateTime Instant required
+  capacity Integer required
+  status ClassStatus required
+}
+
+entity Booking {
+  bookingStatus BookingStatus required
+  bookingTime Instant required
+}
+
+entity CheckIn {
+  checkInTime Instant required
+}
+
+enum BookingStatus {
+  CONFIRMED,
+  CANCELLED
+}
+
+enum ClassStatus {
+  PLANNED,
+  COMPLETED,
+  CANCELLED
+}
+
+enum MembershipStatus {
+  ACTIVE,
+  SUSPENDED,
+  EXPIRED
+}
+
+relationship OneToMany {
+  Member{bookings} to Booking{member required}
+  ClassSession{bookings} to Booking{classSession required}
+  Member{checkIns} to CheckIn{member required}
+  Member{memberships} to Membership{member required}
+  Membership{payments} to Payment{membership required}
+}
+
+paginate * with pagination
+service * with serviceClass
+dto * with mapstruct

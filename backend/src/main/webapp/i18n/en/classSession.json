@@ -1,0 +1,28 @@
+{
+  "smartGymManagerApp": {
+    "classSession": {
+      "home": {
+        "title": "Class Sessions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Class Session",
+        "createOrEditLabel": "Create or edit a Class Session",
+        "notFound": "No Class Sessions found"
+      },
+      "created": "A new Class Session is created with identifier {{ param }}",
+      "updated": "A Class Session is updated with identifier {{ param }}",
+      "deleted": "A Class Session is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Class Session {{ id }}?"
+      },
+      "detail": {
+        "title": "Class Session"
+      },
+      "id": "ID",
+      "title": "Title",
+      "dateTime": "Date Time",
+      "capacity": "Capacity",
+      "status": "Status",
+      "bookings": "Bookings"
+    }
+  }
+}

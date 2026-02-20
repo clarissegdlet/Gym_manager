@@ -1,0 +1,51 @@
+{
+  "annotations": {
+    "changelogDate": "20260220103046"
+  },
+  "applications": ["smartGymManager"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "type",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "startDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "endDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "MembershipStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ACTIVE,SUSPENDED,EXPIRED"
+    }
+  ],
+  "name": "Membership",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "payment",
+      "otherEntityRelationshipName": "membership",
+      "relationshipName": "payments",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "member",
+      "otherEntityRelationshipName": "memberships",
+      "relationshipName": "member",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

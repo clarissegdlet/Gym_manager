@@ -1,0 +1,143 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-booking-heading" data-cy="BookingCreateUpdateHeading" jhiTranslate="smartGymManagerApp.booking.home.createOrEditLabel">
+        Create or edit a Booking
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="smartGymManagerApp.booking.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let bookingStatusRef = editForm.get('bookingStatus')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_bookingStatus" jhiTranslate="smartGymManagerApp.booking.bookingStatus">Booking Status</label>
+          <select
+            class="form-control"
+            name="bookingStatus"
+            formControlName="bookingStatus"
+            id="field_bookingStatus"
+            data-cy="bookingStatus"
+          >
+            <option [ngValue]="null">{{ 'smartGymManagerApp.BookingStatus.null' | translate }}</option>
+            @for (bookingStatus of bookingStatusValues; track $index) {
+              <option [value]="bookingStatus">{{ 'smartGymManagerApp.BookingStatus.' + bookingStatus | translate }}</option>
+            }
+          </select>
+          @if (bookingStatusRef.invalid && (bookingStatusRef.dirty || bookingStatusRef.touched)) {
+            <div>
+              @if (editForm.get('bookingStatus')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let bookingTimeRef = editForm.get('bookingTime')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_bookingTime" jhiTranslate="smartGymManagerApp.booking.bookingTime">Booking Time</label>
+          <div class="d-flex">
+            <input
+              id="field_bookingTime"
+              data-cy="bookingTime"
+              type="datetime-local"
+              class="form-control"
+              name="bookingTime"
+              formControlName="bookingTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (bookingTimeRef.invalid && (bookingTimeRef.dirty || bookingTimeRef.touched)) {
+            <div>
+              @if (editForm.get('bookingTime')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('bookingTime')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_member" jhiTranslate="smartGymManagerApp.booking.member">Member</label>
+          <select
+            class="form-control"
+            id="field_member"
+            data-cy="member"
+            name="member"
+            formControlName="member"
+            [compareWith]="compareMember"
+          >
+            @if (editForm.get(['member'])!.value === null) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (memberOption of membersSharedCollection; track $index) {
+              <option [ngValue]="memberOption">{{ memberOption.id }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['member'])!.invalid && (editForm.get(['member'])!.dirty || editForm.get(['member'])!.touched)) {
+          <div>
+            @if (editForm.get(['member'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_classSession" jhiTranslate="smartGymManagerApp.booking.classSession">Class Session</label>
+          <select
+            class="form-control"
+            id="field_classSession"
+            data-cy="classSession"
+            name="classSession"
+            formControlName="classSession"
+            [compareWith]="compareClassSession"
+          >
+            @if (editForm.get(['classSession'])!.value === null) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (classSessionOption of classSessionsSharedCollection; track $index) {
+              <option [ngValue]="classSessionOption">{{ classSessionOption.id }}</option>
+            }
+          </select>
+        </div>
+        @if (
+          editForm.get(['classSession'])!.invalid && (editForm.get(['classSession'])!.dirty || editForm.get(['classSession'])!.touched)
+        ) {
+          <div>
+            @if (editForm.get(['classSession'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
