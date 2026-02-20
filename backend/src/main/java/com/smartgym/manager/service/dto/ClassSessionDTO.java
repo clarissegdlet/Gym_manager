@@ -26,6 +26,10 @@ public class ClassSessionDTO implements Serializable {
     @NotNull
     private ClassStatus status;
 
+    private CoachDTO coach;
+
+    private RoomDTO room;
+
     public Long getId() {
         return id;
     }
@@ -66,6 +70,22 @@ public class ClassSessionDTO implements Serializable {
         this.status = status;
     }
 
+    public CoachDTO getCoach() {
+        return coach;
+    }
+
+    public void setCoach(CoachDTO coach) {
+        this.coach = coach;
+    }
+
+    public RoomDTO getRoom() {
+        return room;
+    }
+
+    public void setRoom(RoomDTO room) {
+        this.room = room;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -96,6 +116,8 @@ public class ClassSessionDTO implements Serializable {
             ", dateTime='" + getDateTime() + "'" +
             ", capacity=" + getCapacity() +
             ", status='" + getStatus() + "'" +
+            ", coach=" + getCoach() +
+            ", room=" + getRoom() +
             "}";
     }
 }

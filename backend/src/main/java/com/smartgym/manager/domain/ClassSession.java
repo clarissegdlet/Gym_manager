@@ -8,15 +8,12 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * A ClassSession.
  */
 @Entity
 @Table(name = "class_session")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class ClassSession implements Serializable {
 
@@ -46,9 +43,14 @@ public class ClassSession implements Serializable {
     private ClassStatus status;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "classSession")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "member", "classSession" }, allowSetters = true)
     private Set<Booking> bookings = new HashSet<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Coach coach;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Room room;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -145,6 +147,32 @@ public class ClassSession implements Serializable {
     public ClassSession removeBookings(Booking booking) {
         this.bookings.remove(booking);
         booking.setClassSession(null);
+        return this;
+    }
+
+    public Coach getCoach() {
+        return this.coach;
+    }
+
+    public void setCoach(Coach coach) {
+        this.coach = coach;
+    }
+
+    public ClassSession coach(Coach coach) {
+        this.setCoach(coach);
+        return this;
+    }
+
+    public Room getRoom() {
+        return this.room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public ClassSession room(Room room) {
+        this.setRoom(room);
         return this;
     }
 

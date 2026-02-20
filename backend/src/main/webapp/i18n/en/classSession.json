@@ -22,7 +22,9 @@
       "dateTime": "Date Time",
       "capacity": "Capacity",
       "status": "Status",
-      "bookings": "Bookings"
+      "bookings": "Bookings",
+      "coach": "Coach",
+      "room": "Room"
     }
   }
 }

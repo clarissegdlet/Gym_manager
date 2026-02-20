@@ -60,6 +60,9 @@ public class ClassSessionAsserts {
      * @param actual the actual entity
      */
     public static void assertClassSessionUpdatableRelationshipsEquals(ClassSession expected, ClassSession actual) {
-        // empty method
+        assertThat(actual)
+            .as("Verify ClassSession relationships")
+            .satisfies(a -> assertThat(a.getCoach()).as("check coach").isEqualTo(expected.getCoach()))
+            .satisfies(a -> assertThat(a.getRoom()).as("check room").isEqualTo(expected.getRoom()));
     }
 }

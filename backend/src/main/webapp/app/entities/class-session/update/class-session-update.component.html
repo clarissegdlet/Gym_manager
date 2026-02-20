@@ -97,6 +97,26 @@
             </div>
           }
         </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_coach" jhiTranslate="smartGymManagerApp.classSession.coach">Coach</label>
+          <select class="form-control" id="field_coach" data-cy="coach" name="coach" formControlName="coach" [compareWith]="compareCoach">
+            <option [ngValue]="null"></option>
+            @for (coachOption of coachesSharedCollection; track $index) {
+              <option [ngValue]="coachOption">{{ coachOption.name }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_room" jhiTranslate="smartGymManagerApp.classSession.room">Room</label>
+          <select class="form-control" id="field_room" data-cy="room" name="room" formControlName="room" [compareWith]="compareRoom">
+            <option [ngValue]="null"></option>
+            @for (roomOption of roomsSharedCollection; track $index) {
+              <option [ngValue]="roomOption">{{ roomOption.name }}</option>
+            }
+          </select>
+        </div>
       </div>
 
       <div>

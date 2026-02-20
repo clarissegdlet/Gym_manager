@@ -1,0 +1,25 @@
+{
+  "smartGymManagerApp": {
+    "coach": {
+      "home": {
+        "title": "Coaches",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Coach",
+        "createOrEditLabel": "Create or edit a Coach",
+        "notFound": "No Coaches found"
+      },
+      "created": "A new Coach is created with identifier {{ param }}",
+      "updated": "A Coach is updated with identifier {{ param }}",
+      "deleted": "A Coach is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Coach {{ id }}?"
+      },
+      "detail": {
+        "title": "Coach"
+      },
+      "id": "ID",
+      "name": "Name",
+      "specialty": "Specialty"
+    }
+  }
+}

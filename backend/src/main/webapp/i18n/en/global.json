@@ -8,13 +8,14 @@
       "entities": {
         "main": "Entities",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)",
-        "adminAuthority": "Authority",
         "member": "Member",
         "membership": "Membership",
         "payment": "Payment",
         "classSession": "Class Session",
         "booking": "Booking",
-        "checkIn": "Check In"
+        "checkIn": "Check In",
+        "coach": "Coach",
+        "room": "Room"
       },
       "account": {
         "main": "Account",

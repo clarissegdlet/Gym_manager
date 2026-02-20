@@ -338,7 +338,7 @@ class MemberResourceIT {
         Member partialUpdatedMember = new Member();
         partialUpdatedMember.setId(member.getId());
 
-        partialUpdatedMember.name(UPDATED_NAME).email(UPDATED_EMAIL);
+        partialUpdatedMember.name(UPDATED_NAME).phone(UPDATED_PHONE);
 
         restMemberMockMvc
             .perform(

@@ -36,6 +36,20 @@
       "relationshipName": "bookings",
       "relationshipSide": "left",
       "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "coach",
+      "relationshipName": "coach",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "room",
+      "relationshipName": "room",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
     }
   ],
   "searchEngine": "no",

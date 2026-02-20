@@ -35,6 +35,8 @@ type ClassSessionFormGroupContent = {
   dateTime: FormControl<ClassSessionFormRawValue['dateTime']>;
   capacity: FormControl<ClassSessionFormRawValue['capacity']>;
   status: FormControl<ClassSessionFormRawValue['status']>;
+  coach: FormControl<ClassSessionFormRawValue['coach']>;
+  room: FormControl<ClassSessionFormRawValue['room']>;
 };
 
 export type ClassSessionFormGroup = FormGroup<ClassSessionFormGroupContent>;
@@ -66,6 +68,8 @@ export class ClassSessionFormService {
       status: new FormControl(classSessionRawValue.status, {
         validators: [Validators.required],
       }),
+      coach: new FormControl(classSessionRawValue.coach),
+      room: new FormControl(classSessionRawValue.room),
     });
   }
 

@@ -8,15 +8,12 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * A Membership.
  */
 @Entity
 @Table(name = "membership")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class Membership implements Serializable {
 
@@ -46,7 +43,6 @@ public class Membership implements Serializable {
     private MembershipStatus status;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "membership")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "membership" }, allowSetters = true)
     private Set<Payment> payments = new HashSet<>();
 

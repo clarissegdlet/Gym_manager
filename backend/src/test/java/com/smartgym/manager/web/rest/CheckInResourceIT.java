@@ -314,6 +314,8 @@ class CheckInResourceIT {
         CheckIn partialUpdatedCheckIn = new CheckIn();
         partialUpdatedCheckIn.setId(checkIn.getId());
 
+        partialUpdatedCheckIn.checkInTime(UPDATED_CHECK_IN_TIME);
+
         restCheckInMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedCheckIn.getId())

@@ -36,6 +36,16 @@ const routes: Routes = [
     data: { pageTitle: 'smartGymManagerApp.checkIn.home.title' },
     loadChildren: () => import('./check-in/check-in.routes'),
   },
+  {
+    path: 'coach',
+    data: { pageTitle: 'smartGymManagerApp.coach.home.title' },
+    loadChildren: () => import('./coach/coach.routes'),
+  },
+  {
+    path: 'room',
+    data: { pageTitle: 'smartGymManagerApp.room.home.title' },
+    loadChildren: () => import('./room/room.routes'),
+  },
   /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
 ];
 

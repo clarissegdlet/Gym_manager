@@ -2,6 +2,8 @@ package com.smartgym.manager.domain;
 
 import static com.smartgym.manager.domain.BookingTestSamples.*;
 import static com.smartgym.manager.domain.ClassSessionTestSamples.*;
+import static com.smartgym.manager.domain.CoachTestSamples.*;
+import static com.smartgym.manager.domain.RoomTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.smartgym.manager.web.rest.TestUtil;
@@ -45,5 +47,29 @@ class ClassSessionTest {
         classSession.setBookings(new HashSet<>());
         assertThat(classSession.getBookings()).doesNotContain(bookingBack);
         assertThat(bookingBack.getClassSession()).isNull();
+    }
+
+    @Test
+    void coachTest() {
+        ClassSession classSession = getClassSessionRandomSampleGenerator();
+        Coach coachBack = getCoachRandomSampleGenerator();
+
+        classSession.setCoach(coachBack);
+        assertThat(classSession.getCoach()).isEqualTo(coachBack);
+
+        classSession.coach(null);
+        assertThat(classSession.getCoach()).isNull();
+    }
+
+    @Test
+    void roomTest() {
+        ClassSession classSession = getClassSessionRandomSampleGenerator();
+        Room roomBack = getRoomRandomSampleGenerator();
+
+        classSession.setRoom(roomBack);
+        assertThat(classSession.getRoom()).isEqualTo(roomBack);
+
+        classSession.room(null);
+        assertThat(classSession.getRoom()).isNull();
     }
 }

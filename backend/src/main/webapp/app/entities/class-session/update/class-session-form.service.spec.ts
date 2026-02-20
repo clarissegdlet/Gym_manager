@@ -24,6 +24,8 @@ describe('ClassSession Form Service', () => {
             dateTime: expect.any(Object),
             capacity: expect.any(Object),
             status: expect.any(Object),
+            coach: expect.any(Object),
+            room: expect.any(Object),
           }),
         );
       });
@@ -38,6 +40,8 @@ describe('ClassSession Form Service', () => {
             dateTime: expect.any(Object),
             capacity: expect.any(Object),
             status: expect.any(Object),
+            coach: expect.any(Object),
+            room: expect.any(Object),
           }),
         );
       });

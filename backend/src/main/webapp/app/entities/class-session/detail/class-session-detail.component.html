@@ -33,6 +33,22 @@
               { null: '', PLANNED: 'PLANNED', COMPLETED: 'COMPLETED', CANCELLED: 'CANCELLED' }[classSessionRef.status ?? 'null']
             }}</span>
           </dd>
+          <dt><span jhiTranslate="smartGymManagerApp.classSession.coach">Coach</span></dt>
+          <dd>
+            @if (classSession()!.coach) {
+              <div>
+                <a [routerLink]="['/coach', classSession()!.coach?.id, 'view']">{{ classSessionRef.coach?.name }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="smartGymManagerApp.classSession.room">Room</span></dt>
+          <dd>
+            @if (classSession()!.room) {
+              <div>
+                <a [routerLink]="['/room', classSession()!.room?.id, 'view']">{{ classSessionRef.room?.name }}</a>
+              </div>
+            }
+          </dd>
         </dl>
 
         <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

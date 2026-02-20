@@ -6,15 +6,12 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.Instant;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * A Booking.
  */
 @Entity
 @Table(name = "booking")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class Booking implements Serializable {
 
@@ -42,7 +39,7 @@ public class Booking implements Serializable {
 
     @ManyToOne(optional = false)
     @NotNull
-    @JsonIgnoreProperties(value = { "bookings" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "bookings", "coach", "room" }, allowSetters = true)
     private ClassSession classSession;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

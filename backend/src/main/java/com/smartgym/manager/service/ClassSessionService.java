@@ -89,6 +89,15 @@ public class ClassSessionService {
     }
 
     /**
+     * Get all the classSessions with eager load of many-to-many relationships.
+     *
+     * @return the list of entities.
+     */
+    public Page<ClassSessionDTO> findAllWithEagerRelationships(Pageable pageable) {
+        return classSessionRepository.findAllWithEagerRelationships(pageable).map(classSessionMapper::toDto);
+    }
+
+    /**
      * Get one classSession by id.
      *
      * @param id the id of the entity.
@@ -97,7 +106,7 @@ public class ClassSessionService {
     @Transactional(readOnly = true)
     public Optional<ClassSessionDTO> findOne(Long id) {
         LOG.debug("Request to get ClassSession : {}", id);
-        return classSessionRepository.findById(id).map(classSessionMapper::toDto);
+        return classSessionRepository.findOneWithEagerRelationships(id).map(classSessionMapper::toDto);
     }
 
     /**

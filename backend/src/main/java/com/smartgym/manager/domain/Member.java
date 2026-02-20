@@ -6,15 +6,12 @@ import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * A Member.
  */
 @Entity
 @Table(name = "member")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class Member implements Serializable {
 
@@ -42,17 +39,14 @@ public class Member implements Serializable {
     private Boolean active;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "member", "classSession" }, allowSetters = true)
     private Set<Booking> bookings = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "member" }, allowSetters = true)
     private Set<CheckIn> checkIns = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "payments", "member" }, allowSetters = true)
     private Set<Membership> memberships = new HashSet<>();
 

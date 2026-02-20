@@ -393,7 +393,7 @@ class MembershipResourceIT {
         Membership partialUpdatedMembership = new Membership();
         partialUpdatedMembership.setId(membership.getId());
 
-        partialUpdatedMembership.type(UPDATED_TYPE).startDate(UPDATED_START_DATE).endDate(UPDATED_END_DATE);
+        partialUpdatedMembership.startDate(UPDATED_START_DATE).endDate(UPDATED_END_DATE);
 
         restMembershipMockMvc
             .perform(

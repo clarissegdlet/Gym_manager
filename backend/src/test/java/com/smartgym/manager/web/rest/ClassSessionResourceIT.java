@@ -4,6 +4,7 @@ import static com.smartgym.manager.domain.ClassSessionAsserts.*;
 import static com.smartgym.manager.web.rest.TestUtil.createUpdateProxyForBean;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -12,18 +13,25 @@ import com.smartgym.manager.IntegrationTest;
 import com.smartgym.manager.domain.ClassSession;
 import com.smartgym.manager.domain.enumeration.ClassStatus;
 import com.smartgym.manager.repository.ClassSessionRepository;
+import com.smartgym.manager.service.ClassSessionService;
 import com.smartgym.manager.service.dto.ClassSessionDTO;
 import com.smartgym.manager.service.mapper.ClassSessionMapper;
 import jakarta.persistence.EntityManager;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -33,6 +41,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Integration tests for the {@link ClassSessionResource} REST controller.
  */
 @IntegrationTest
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class ClassSessionResourceIT {
@@ -61,8 +70,14 @@ class ClassSessionResourceIT {
     @Autowired
     private ClassSessionRepository classSessionRepository;
 
+    @Mock
+    private ClassSessionRepository classSessionRepositoryMock;
+
     @Autowired
     private ClassSessionMapper classSessionMapper;
+
+    @Mock
+    private ClassSessionService classSessionServiceMock;
 
     @Autowired
     private EntityManager em;
@@ -235,6 +250,23 @@ class ClassSessionResourceIT {
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
     }
 
+    @SuppressWarnings({ "unchecked" })
+    void getAllClassSessionsWithEagerRelationshipsIsEnabled() throws Exception {
+        when(classSessionServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restClassSessionMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
+
+        verify(classSessionServiceMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllClassSessionsWithEagerRelationshipsIsNotEnabled() throws Exception {
+        when(classSessionServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restClassSessionMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
+        verify(classSessionRepositoryMock, times(1)).findAll(any(Pageable.class));
+    }
+
     @Test
     @Transactional
     void getClassSession() throws Exception {
@@ -362,7 +394,7 @@ class ClassSessionResourceIT {
         ClassSession partialUpdatedClassSession = new ClassSession();
         partialUpdatedClassSession.setId(classSession.getId());
 
-        partialUpdatedClassSession.title(UPDATED_TITLE).dateTime(UPDATED_DATE_TIME).capacity(UPDATED_CAPACITY).status(UPDATED_STATUS);
+        partialUpdatedClassSession.title(UPDATED_TITLE).dateTime(UPDATED_DATE_TIME);
 
         restClassSessionMockMvc
             .perform(
