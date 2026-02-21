@@ -7,9 +7,11 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+
 /**
  * A Member.
  */
+
 @Entity
 @Table(name = "member")
 @SuppressWarnings("common-java:DuplicatedBlocks")

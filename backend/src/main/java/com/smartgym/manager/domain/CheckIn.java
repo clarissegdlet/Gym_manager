@@ -6,9 +6,11 @@ import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.Instant;
 
+
 /**
  * A CheckIn.
  */
+
 @Entity
 @Table(name = "check_in")
 @SuppressWarnings("common-java:DuplicatedBlocks")
